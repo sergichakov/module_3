@@ -11,6 +11,5 @@ public class SessionObject
     private int currentLevel;
     private String name;
     private int numberOfGames;
-    //private int numberOfLooses;
     private String sessionId;
 }

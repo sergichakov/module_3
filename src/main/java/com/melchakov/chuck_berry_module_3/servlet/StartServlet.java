@@ -10,7 +10,7 @@ import java.io.IOException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-//@WebServlet(name = "startServlet", value = "/")
+@WebServlet(name = "startServlet", value = "/")
 public class StartServlet extends HttpServlet {
     @Override
     public void init() throws ServletException {
@@ -37,8 +37,7 @@ public class StartServlet extends HttpServlet {
             hideForm=" hidden='true' ";
             request.setAttribute("hideForm",hideForm);
         }
-        if(sessionObject==null){//currentSession.getAttribute("session")==null){
-
+        if(sessionObject==null){
              sessionObject=SessionObject.builder()
                     .sessionId(currentSession.getId())
                      .name("Unknown")
@@ -51,7 +50,6 @@ public class StartServlet extends HttpServlet {
             request.setAttribute("hideForm",hideForm);
             sessionObject.setCurrentLevel(1);
         }
-        //SessionObject sessionObject=(SessionObject) currentSession.getAttribute("session");
         String ipAddress = request.getHeader("X-FORWARDED-FOR");//getting ipAddress
         if (ipAddress == null) {
             ipAddress = request.getRemoteAddr();

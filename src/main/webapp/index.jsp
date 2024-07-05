@@ -8,22 +8,13 @@
 <body>
 <h1>Пролог
 </h1>
-
 <div>Ты стоишль в коспическом порту и готов подняться на борт своего корабля. Так что вперед!</div>
-
 <br>
-
 <div>
 <form  ${hideForm} >
-
    <input type="text" id="field1" name="userName" maxlength="8" size="10"/>
     <input type="submit" value="Представиться"/>
 </form></div>
-
-<!-- <input type="text" id="name" name="name" placeholder="Unknown" required maxlength="8" size="10" />
-<button onclick="window.location.href='/start?name='">Предствиться</button>
-  -->
-
 <button type="button" onclick="window.location.href='/question?page=1'">Начать Игру</button>
 <br>Статистика<br>
 IP address: ${ipAddress}<br>

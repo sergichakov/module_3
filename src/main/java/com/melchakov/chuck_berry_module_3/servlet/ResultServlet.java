@@ -14,7 +14,6 @@ import org.slf4j.LoggerFactory;
 
 @WebServlet(name = "resultServlet", value = "/result")
 public class ResultServlet extends HttpServlet{
-    //private QuestionService questionService=null;
     public void init() {
         Logger logger = LoggerFactory.getLogger(ResultServlet.class);
         ServletContext servletContext = getServletContext();
@@ -24,34 +23,21 @@ public class ResultServlet extends HttpServlet{
             servletContext.setAttribute("service",questionService);
         }catch(IOException e) {
             logger.error("cant instantiate QuestionService "+ e.getMessage());
-            //Надо перейти на страницу с ошибкой
         }
 
     }
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
         ServletContext servletContext = getServletContext();
         QuestionService questionService=(QuestionService) servletContext.getAttribute("service");
-
-        /*try{
-            questionService=QuestionService.getInstance();
-        }catch(IOException e) {
-
-            //Надо перейти на страницу с ошибкой
-        }*/
-
         Logger logger=(Logger) servletContext.getAttribute("logger");
         HttpSession currentSession = request.getSession();
         SessionObject sessionObject=(SessionObject)currentSession.getAttribute("session");
         if(sessionObject==null){
             response.sendRedirect("/");
             return;
-        }else{
-
         }
         if (questionService==null)
             response.sendError(505,"cant instantiate question service");
-        //System.out.println("now");
-        //ServletContext servletContext = getServletContext();
         Integer pageNumber=null;
         try {
             pageNumber=Integer.parseInt(request.getParameter("page"));
@@ -59,8 +45,6 @@ public class ResultServlet extends HttpServlet{
             response.sendError(404,"page_parameter is not Integer or No such at all");
             return;
         }
-
-        //Data data=questionService.readFromFile();
         String questionStr="";
         Question quest=null;
         try {
@@ -69,20 +53,6 @@ public class ResultServlet extends HttpServlet{
         }catch(IllegalArgumentException e){
             response.sendError(404, "no such number page=" + pageNumber);
         }
-        /*String str=data.getQuestions().stream()
-                .map((quest)->{
-                    System.out.println("getId:"+quest.getId());
-            if(quest.getId()==(pageNumber))return quest.getQuestion();
-            else{
-                try {
-                    response.sendError(404, "no such page number " + pageNumber);
-                }catch(IOException e){
-                    e.printStackTrace();
-                }
-                return "";
-            }
-                 }).findFirst().orElse("");//.collect(Collectors.joining());
-        */
         if (questionStr.isEmpty()){
             try {
                 response.sendError(404, "question String with id="+pageNumber+" is empty ");
@@ -95,17 +65,7 @@ public class ResultServlet extends HttpServlet{
         if(pageNumber-sessionLevel>2||quest.isFailed()==false&&quest.isWin()==false)
             response.sendError(404, "ResultServlet you cheating! You set pageNumber="
                     + pageNumber+", but your level="+sessionLevel);
-        /*for (Cookie cookie:request.getCookies()){
-            int level=-1;
-            if(cookie.getName().equals("level"))level=Integer.parseInt(cookie.getValue());
-            if(pageNumber-level>2)
-                response.sendError(404, "ResultServlet you cheating! You set pageNumber="
-                        + pageNumber+", but your level="+level);
 
-
-            //need to test cheaters
-        }*/
-        //response.addCookie(new Cookie("level", ""+pageNumber));
         String ipAddress = request.getHeader("X-FORWARDED-FOR");//getting ipAddress
         if (ipAddress == null) {
             ipAddress = request.getRemoteAddr();
