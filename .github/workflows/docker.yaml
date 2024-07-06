@@ -35,8 +35,9 @@ jobs:
 #     Build Docker image:
       - name: Build and tag image
         run: |
-          docker build -t "docker.pkg.github.com/sergichakov/module_3/module_3:latest" -t "docker.pkg.github.com/sergichakov/module_3/module_3:${GITHUB_SHA::8}"
-          docker build -t "${{ vars.DOCKERHUB_IMAGE_NAME }}:latest" -t "${{ vars.DOCKERHUB_IMAGE_NAME }}:${GITHUB_SHA::8}"
+          docker build -t "docker.pkg.github.com/sergichakov/module_3/module_3:latest"
+#          -t "docker.pkg.github.com/sergichakov/module_3/module_3:${GITHUB_SHA::8}"
+#          docker build -t "${{ vars.DOCKERHUB_IMAGE_NAME }}:latest" -t "${{ vars.DOCKERHUB_IMAGE_NAME }}:${GITHUB_SHA::8}"
 #          docker build -t "${{ steps.global_env.outputs.DOCKERHUB_IMAGE_NAME }}:latest" -t "${{ steps.global_env.outputs.DOCKERHUB_IMAGE_NAME }}:${GITHUB_SHA::8}" .
 
       - name: Docker login
@@ -46,5 +47,5 @@ jobs:
       - name: Publish image
         env:
           IMAGE_NAME: $GITHUB1_REPOSITORY
-        run: docker push "docker.pkg.github.com/$GITHUB1_REPOSITORY/${{ steps.global_env.outputs.IMAGE_NAME }}"
-
+        run: docker push "docker.pkg.github.com/$GITHUB1_REPOSITORY/module_3"
+#        run: docker push "docker.pkg.github.com/$GITHUB1_REPOSITORY/${{ steps.global_env.outputs.IMAGE_NAME }}"
