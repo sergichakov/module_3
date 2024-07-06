@@ -29,7 +29,7 @@ jobs:
           echo "{DOCKERHUB_IMAGE_NAME}={docker.pkg.github.com/sergichakov/module_3/module_3}" >> $GITHUB_OUTPUT
 #          echo "::set-output name=IMAGE_NAME::${GITHUB1_REPOSITORY#*/}"
 #          echo "::set-output name=DOCKERHUB_IMAGE_NAME::docker.pkg.github.com/${GITHUB1_REPOSITORY}/${GITHUB1_REPOSITORY#*/}"
-         	
+#
 #     Build Docker image:
       - name: Build and tag image
         run: |
