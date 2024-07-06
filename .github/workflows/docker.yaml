@@ -25,8 +25,8 @@ jobs:
       - name: set global env
         id: global_env
         run: |
-          echo {IMAGE_NAME}={${GITHUB1_REPOSITORY#*/}} >> $GITHUB_OUTPUT
-	  echo "{DOCKERHUB_IMAGE_NAME}={docker.pkg.github.com/${GITHUB1_REPOSITORY}/${GITHUB1_REPOSITORY#*/}}" >> $GITHUB_OUTPUT
+          echo "{IMAGE_NAME}={module_3}" >> $GITHUB_OUTPUT
+	  echo "{DOCKERHUB_IMAGE_NAME}={docker.pkg.github.com/sergichakov/module_3/module_3}" >> $GITHUB_OUTPUT
 #          echo "::set-output name=IMAGE_NAME::${GITHUB1_REPOSITORY#*/}"
 #          echo "::set-output name=DOCKERHUB_IMAGE_NAME::docker.pkg.github.com/${GITHUB1_REPOSITORY}/${GITHUB1_REPOSITORY#*/}"
          	
