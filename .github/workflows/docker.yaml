@@ -12,9 +12,9 @@ jobs:
     steps:
 
 #     Build JAR:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v4
       - name: set up JDK 21
-        uses: actions/setup-java@v1
+        uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
           java-version: 21
@@ -25,9 +25,11 @@ jobs:
       - name: set global env
         id: global_env
         run: |
-          echo "::set-output name=IMAGE_NAME::${GITHUB1_REPOSITORY#*/}"
-          echo "::set-output name=DOCKERHUB_IMAGE_NAME::docker.pkg.github.com/${GITHUB1_REPOSITORY}/${GITHUB1_REPOSITORY#*/}"
-
+          echo {IMAGE_NAME}={${GITHUB1_REPOSITORY#*/}} >> $GITHUB_OUTPUT
+	  echo "{DOCKERHUB_IMAGE_NAME}={docker.pkg.github.com/${GITHUB1_REPOSITORY}/${GITHUB1_REPOSITORY#*/}}" >> $GITHUB_OUTPUT
+#          echo "::set-output name=IMAGE_NAME::${GITHUB1_REPOSITORY#*/}"
+#          echo "::set-output name=DOCKERHUB_IMAGE_NAME::docker.pkg.github.com/${GITHUB1_REPOSITORY}/${GITHUB1_REPOSITORY#*/}"
+         	
 #     Build Docker image:
       - name: Build and tag image
         run: |
