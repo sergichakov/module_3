@@ -3,6 +3,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 .github/workflows/docker.yaml
+docker.yaml
 
 ### IntelliJ IDEA ###
 .idea/
