@@ -4,6 +4,7 @@ target/
 !**/src/test/**/target/
 .github/workflows/docker.yaml
 docker.yaml
+*r.yaml
 
 ### IntelliJ IDEA ###
 .idea/
